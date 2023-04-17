@@ -27,43 +27,43 @@ class BinarySearchTree {
     if (this.data == null) {
       this.data = new Node(arg);
     }
-    this.nodes.push(arg);
+    this.nodes.push(new Node(arg));
   }
-  has(data) {
+  has(arg) {
     let result = false;
     this.nodes.forEach((el) => {
-      if (el == data) {
+      if (el.data == arg) {
         result = true;
       }
     });
     return result;
   }
 
-  find(data) {
-    let arr = this.nodes.filter((el) => el == data);
-    let res = arr.length == 0 ? null : true;
+  find(arg) {
+    let arr = this.nodes.filter((el) => el.data == arg);
+    let res = arr.length == 0 ? null : arr[0];
     return res;
   }
 
-  remove(data) {
-    this.nodes = this.nodes.filter((el) => el !== data);
+  remove(arg) {
+    this.nodes = this.nodes.filter((el) => el.data !== arg);
   }
 
   min() {
-    let min = this.nodes[0];
+    let min = this.nodes[0].data;
     this.nodes.forEach((el) => {
-      if (el < min) {
-        min = el;
+      if (el.data < min) {
+        min = el.data;
       }
     });
     return min;
   }
 
   max() {
-    let max = this.nodes[0];
+    let max = this.nodes[0].data;
     this.nodes.forEach((el) => {
-      if (el > max) {
-        max = el;
+      if (el.data > max) {
+        max = el.data;
       }
     });
     return max;
