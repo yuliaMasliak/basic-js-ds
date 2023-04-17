@@ -7,47 +7,67 @@ const { NotImplementedError } = require('../extensions/index.js');
  * using Node from extensions
  */
 class Node {
-  constructor(value) {
-    this.value = value;
+  constructor(data) {
+    this.data = data;
     this.left = null;
     this.right = null;
   }
 }
 class BinarySearchTree {
   constructor() {
-    this.rootNode = null;
+    this.data = null;
+    this.nodes = [];
   }
 
   root() {
-    return this.rootNode;
+    return this.data;
   }
 
-  add(data) {
-    this.rootNode = addWithin(this.rootNode, data);
-    function addWithin(node, data) {
-      if (!node) {
-        return new Node(data);
-      }
-      if (node.value == data) {
-        return node;
-      }
-      if (data < node.value) {
-        node.left = addWithin(node.left, data);
-      } else {
-        node.right = addWithin(node.right, data);
-      }
-      return node;
+  add(arg) {
+    if (this.data == null) {
+      this.data = new Node(arg);
     }
+    this.nodes.push(arg);
   }
-  has(data) {}
+  has(data) {
+    let result = false;
+    this.nodes.forEach((el) => {
+      if (el == data) {
+        result = true;
+      }
+    });
+    return result;
+  }
 
-  find(data) {}
+  find(data) {
+    let arr = this.nodes.filter((el) => el == data);
+    let res = arr.length == 0 ? null : true;
+    return res;
+  }
 
-  remove(data) {}
+  remove(data) {
+    this.nodes = this.nodes.filter((el) => el !== data);
+  }
 
-  min() {}
+  min() {
+    let min = this.nodes[0];
+    this.nodes.forEach((el) => {
+      if (el < min) {
+        min = el;
+      }
+    });
+    return min;
+  }
 
-  max() {}
+  max() {
+    let max = this.nodes[0];
+    this.nodes.forEach((el) => {
+      if (el > max) {
+        max = el;
+      }
+    });
+    return max;
+  }
 }
 
 module.exports = {
